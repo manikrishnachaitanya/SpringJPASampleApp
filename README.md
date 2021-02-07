@@ -1,1 +1,1 @@
-# SpringJPASampleApp
+# enhancedStudentService
