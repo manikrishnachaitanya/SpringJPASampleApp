@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,7 +31,7 @@ public class StudentDBController
         Student student = studentService.createStudent(name, id, percentage);
 
         System.out.println("Saved student successfully " + student);
-        return "Saved Student";
+        return "Saved Student " + student.toString();
     }
 
     @GetMapping("/get")
@@ -44,6 +45,27 @@ public class StudentDBController
         return null;
     }
 
+    @GetMapping("/findStudent/{id}")
+    public @ResponseBody Student findStudentById(
+            @PathVariable(value = "id") int id)
+    {
+        // log statement
+        System.out.println("Entered method getStudent : TRACE");
+        //printBeans();
+       Student student = studentService.findStudentById(id);
+        return student;
+    }
+    @GetMapping("/deleteStudent/{id}")
+    public @ResponseBody Student deleteStudentById(
+            @PathVariable(value = "id") int id)
+    {
+        // log statement
+        System.out.println("Entered method getStudent : TRACE");
+        //printBeans();
+        Student student = studentService.deleteStudentById(id);
+        return student;
+    }
+
     @GetMapping("/listAll")
     public @ResponseBody List<Student> listAll()
     {
@@ -52,6 +74,21 @@ public class StudentDBController
         return studentService.listAllStudents();
     }
 
+    @GetMapping("/deleteAll")
+    public @ResponseBody void deleteAll()
+    {
+        // log statement
+        System.out.println("Entered method deleteAll : TRACE");
+        studentService.deleteAll();
+    }
+
+    @GetMapping("/count")
+    public @ResponseBody long count()
+    {
+        // log statement
+        System.out.println("Entered method count : TRACE");
+        return studentService.count();
+    }
 
     @GetMapping("/hello")
     public @ResponseBody String hello()

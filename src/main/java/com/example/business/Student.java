@@ -13,17 +13,18 @@ public class Student
 {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    private int entryId;
 
-    private Integer id;
+    private int id;
     private String name;
     private double percentage;
     private String address;
 
-    public Student(String name, Integer id, double percentage)
+    public Student()
     {
     }
 
-    public Student(String name, String id, double percentage)
+    public Student(String name, int id, double percentage)
     {
         super();
         this.name = name;
@@ -41,12 +42,12 @@ public class Student
         this.name = name;
     }
 
-    public String getId()
+    public int getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(int id)
     {
         this.id = id;
     }
